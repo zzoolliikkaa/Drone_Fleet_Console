@@ -1,0 +1,6 @@
+WRMCB=function(e){var c=console;if(c&&c.log&&c.error){c.log('Error running batched script.');c.error(e);}}
+;
+try {
+/* module-key = 'com.refinedwiki.confluence.plugins.uitoolkit:571', location = 'toolkit-base.9c64ff05522255873e26.js' */
+"use strict";(self.webpackChunkRefinedToolkitWebPack=self.webpackChunkRefinedToolkitWebPack||[]).push([[571],{28357:function(o,i,e){e.r(i);var n=e(74692),t=e.n(n);void 0===window.RWUI&&(window.RWUI={}),void 0===window.RWUI.Models&&(window.RWUI.Models={}),void 0===window.RWUI.Collections&&(window.RWUI.Collections={}),void 0===window.RWUI.Views&&(window.RWUI.Views={}),void 0===window.RWUI.Events&&(window.RWUI.Events={}),RWUI.capitalizeFirstLetter=function(o){return o.charAt(0).toUpperCase()+o.slice(1)},RWUI.scrollToElementWithOffset=function(o,i){if(void 0!==o&&o.length>0&&o.offset()){var e=t()(window).scrollTop(),n=e+t()(window).height(),w=o.offset().top,s=w+o.height();(w<e||s>n)&&window.scroll(0,o.offset().top-i)}},RWUI.isHashValid=function(o){return!/[^-–A-Za-z0-9._+~*%]/g.test(o)}}}]);
+}catch(e){WRMCB(e)};

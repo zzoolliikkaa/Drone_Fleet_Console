@@ -1,4 +1,7 @@
-﻿public class SurveyDrone : Drone, IPhotoCapture, INavigable
+﻿namespace Drone_Fleet_Console.Models;
+
+using Drone_Fleet_Console.Models.Interfaces;
+public class SurveyDrone : Drone, IPhotoCapture, INavigable
 {
     public override DroneTypeEnum Type => DroneTypeEnum.Survey;
     private int PhotoCountMax { get; } = 2000;
@@ -6,7 +9,7 @@
     public (double lat, double lon)? CurrentWaypoint { get; private set; } = (0, 0);
     public override void TakeOff()
     {
-        if ((!IsAirborne) && (BatteryPercent > BatteryTakeOffLimit))
+        if ((!IsAirborne) && (BatteryPercent >= BatteryTakeOffLimit))
         {
             Console.WriteLine($"[SurveyDrone]: The {Name} drone (ID {Id}) is taking off...");
             IsAirborne = true;
@@ -30,7 +33,7 @@
     }
     public override bool RunSelfTest()
     {
-        if (BatteryPercent > BatteryTakeOffLimit)
+        if (BatteryPercent >= BatteryTakeOffLimit)
         {
             if (PhotoCount < PhotoCountMax)
             {
@@ -43,15 +46,22 @@
     }
     public void TakePhoto()
     {
-        if (PhotoCount < PhotoCountMax)
+        if (IsAirborne)
         {
-            Console.WriteLine($"[SurveyDrone]: The {Name} drone (ID {Id}) is taking a photo...");
-            PhotoCount++;
-            Console.WriteLine($"[SurveyDrone]: Photo #{PhotoCount} created.");
+            if (PhotoCount < PhotoCountMax)
+            {
+                Console.WriteLine($"[SurveyDrone]: The {Name} drone (ID {Id}) is taking a photo...");
+                PhotoCount++;
+                Console.WriteLine($"[SurveyDrone]: Photo #{PhotoCount} created.");
+            }
+            else
+            {
+                Console.WriteLine($"[SurveyDrone]: The {Name} drone (ID {Id}) photo storage is full.");
+            }
         }
         else
         {
-            Console.WriteLine($"[SurveyDrone]: The {Name} drone (ID {Id}) photo storage is full.");
+            Console.WriteLine($"[SurveyDrone]: The {Name} drone (ID {Id}) has landed.");
         }
     }
     public void SetWaypoint(double lat, double lon)

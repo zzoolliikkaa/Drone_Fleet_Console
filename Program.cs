@@ -1,4 +1,6 @@
 ﻿using Drone_Fleet_Console.Models;
+using Drone_Fleet_Console;
+using Drone_Fleet_Console.Models.Interfaces;
 
 var mainMenu = new Menu();
 var droneMenu = new Menu();
@@ -29,7 +31,7 @@ while (MainMenuOptionsEnum.Exit != (MainMenuOptionsEnum)mainChoice)
     MainMenuOptionsEnum mainMenuSelected = (MainMenuOptionsEnum)mainChoice;
     switch (mainMenuSelected)
     {
-        case MainMenuOptionsEnum.ListDrones:
+        case MainMenuOptionsEnum.ListDrone:
             droneRegistry.ListDrone();
             break;
 
@@ -143,16 +145,16 @@ public class DroneRegistry
 
     private string ReadDroneName()
     {
-        string? Name;
+        string? name;
 
         do
         {
             Console.Write("Enter the drone's name: ");
-            Name = Console.ReadLine();
+            name = Console.ReadLine();
         }
-        while (string.IsNullOrWhiteSpace(Name));
+        while (string.IsNullOrWhiteSpace(name));
 
-        return Name;
+        return name;
     }
 
     internal void PreFlightCheck()
@@ -171,7 +173,6 @@ public class DroneRegistry
     {
         if (!EmptyList())
         {
-            Console.Write("Enter the drone number:");
             if (SelectDrone(out Drone? drone))
             {
                 Console.WriteLine("Drone TakeOff:");
@@ -185,7 +186,6 @@ public class DroneRegistry
     {
         if (!EmptyList())
         {
-            Console.Write("Enter the drone number:");
             if (SelectDrone(out Drone? drone))
             {
                 Console.WriteLine("Drone Landing:");
@@ -199,7 +199,6 @@ public class DroneRegistry
     {
         if (!EmptyList())
         {
-            Console.Write("Enter the drone number:");
             if (SelectDrone(out Drone? drone))
             {
                 if (drone is INavigable navigable)
@@ -240,7 +239,6 @@ public class DroneRegistry
     {
         if (!EmptyList())
         {
-            Console.Write("Enter the drone number:");
             if (SelectDrone(out Drone? drone))
             {
                 if (drone is IPhotoCapture photoCapture)
@@ -251,7 +249,7 @@ public class DroneRegistry
                 if (drone is ICargoCarrier cargoCarrier)
                 {
                     Console.Write("Enter the load height in kg:");
-                    if (int.TryParse(Console.ReadLine(), out int kg))
+                    if (int.TryParse(Console.ReadLine(), out int kg) && (kg > 0))
                     {
                         cargoCarrier.Load(kg);
                     }
@@ -273,7 +271,6 @@ public class DroneRegistry
     {
         if (!EmptyList())
         {
-            Console.Write("Enter the drone number:");
             if (SelectDrone(out Drone? drone))
             {
                 Console.Write("Enter desired battery level[20 , 100]:");
@@ -305,6 +302,7 @@ public class DroneRegistry
 
     private bool SelectDrone(out Drone? drone)
     {
+        Console.Write("Enter the drone id:");
         if (!Guid.TryParse(Console.ReadLine(), out Guid droneId))
         {
             Console.WriteLine("Drone not found.");

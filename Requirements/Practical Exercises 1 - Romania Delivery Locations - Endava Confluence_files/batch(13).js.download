@@ -1,0 +1,6 @@
+WRMCB=function(e){var c=console;if(c&&c.log&&c.error){c.log('Error running batched script.');c.error(e);}}
+;
+try {
+/* module-key = 'com.refinedwiki.confluence.plugins.uitoolkit:576', location = 'ui-steps-resource.20455967819438a6241c.js' */
+"use strict";(self.webpackChunkRefinedToolkitWebPack=self.webpackChunkRefinedToolkitWebPack||[]).push([[576],{18008:function(e,n,o){o.r(n);var i=o(74692),t=o.n(i),r="refined/toolkit/steps/rendered";RWUI.Events.STEPS_RENDERED=r;var s=function(){t()(".rwui_steps").each(function(e,n){t()("> .rwui_step",n).each(function(e,n){t()(".rwui_item_number",n).html(e+1)}),AJS.trigger(r,n)})};window.ConfluenceMobile?(void 0===window.RWUI&&(window.RWUI={}),ConfluenceMobile.contentEventAggregator.on("displayed",function(){s()})):(void 0===window.RWUI&&console.error("RWUI namespace was undefined, ensure that base.js has been loaded"),AJS.toInit(function(){s()}))}}]);
+}catch(e){WRMCB(e)};

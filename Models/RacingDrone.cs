@@ -1,9 +1,11 @@
-﻿public class RacingDrone : Drone
+﻿namespace Drone_Fleet_Console.Models;
+
+public class RacingDrone : Drone
 {
     public override DroneTypeEnum Type => DroneTypeEnum.Racing;
     public override void TakeOff()
     {
-        if ((!IsAirborne) && (BatteryPercent > BatteryTakeOffLimit))
+        if ((!IsAirborne) && (BatteryPercent >= BatteryTakeOffLimit))
         {
             Console.WriteLine($"[RacingDrone]: The {Name} drone (ID {Id}) is taking off...");
             IsAirborne = true;
@@ -27,7 +29,7 @@
     }
     public override bool RunSelfTest()
     {
-        if (BatteryPercent > BatteryTakeOffLimit)
+        if (BatteryPercent >= BatteryTakeOffLimit)
         {
             Console.WriteLine($"[RacingDrone]: The {Name} drone (ID {Id}) self-test passed.");
             return true;

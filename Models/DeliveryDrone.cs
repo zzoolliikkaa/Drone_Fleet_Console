@@ -1,4 +1,9 @@
-﻿public class DeliveryDrone : Drone, INavigable, ICargoCarrier
+﻿namespace Drone_Fleet_Console.Models;
+
+using Drone_Fleet_Console.Models.Interfaces;
+
+
+public class DeliveryDrone : Drone, INavigable, ICargoCarrier
 {
     public override DroneTypeEnum Type => DroneTypeEnum.Delivery;
     public double CapacityKg { get; } = 12;
@@ -6,7 +11,7 @@
     public (double lat, double lon)? CurrentWaypoint { get; private set; } = (0, 0);
     public override void TakeOff()
     {
-        if ((!IsAirborne) && (BatteryPercent > BatteryTakeOffLimit))
+        if ((!IsAirborne) && (BatteryPercent >= BatteryTakeOffLimit))
         {
             Console.WriteLine($"[DeliveryDrone]: The {Name} drone (ID {Id}) is taking off...");
             IsAirborne = true;
@@ -30,7 +35,7 @@
     }
     public override bool RunSelfTest()
     {
-        if (BatteryPercent > BatteryTakeOffLimit)
+        if (BatteryPercent >= BatteryTakeOffLimit)
         {
             if (CurrentLoadKg < CapacityKg)
                 Console.WriteLine($"[DeliveryDrone]: The {Name} drone (ID {Id}) self-test passed.");

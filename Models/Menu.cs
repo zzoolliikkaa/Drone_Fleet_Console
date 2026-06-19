@@ -1,10 +1,8 @@
 ﻿namespace Drone_Fleet_Console.Models;
 
-public class Menu()
+public class Menu
 {
-
-    // field : _<field_name>
-    public List<string> MenuOptions = new List<string>();
+    private List<string> _menuOptions = new List<string>();
     private string _caption = string.Empty;
     public void AddCaption(string text)
     {
@@ -13,18 +11,18 @@ public class Menu()
 
     public void AddOption(string option)
     {
-        MenuOptions.Add(option);
+        _menuOptions.Add(option);
     }
     public void DisplayMenu()
     {
         Console.WriteLine("Please select an option:"); // nu are sens
-        if (MenuOptions.Count > 0)
+        if (_menuOptions.Count > 0)
         {
             Console.Clear();
             Console.WriteLine($"********** - {_caption} - **********");
-            for (int i = 0; i < MenuOptions.Count; i++)
+            for (int i = 0; i < _menuOptions.Count; i++)
             {
-                Console.WriteLine($"{i + 1}. {MenuOptions[i]}");
+                Console.WriteLine($"{i + 1}. {_menuOptions[i]}");
             }
             Console.Write("Select: ");
         }

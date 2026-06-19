@@ -1,6 +1,8 @@
-﻿enum MainMenuOptionsEnum
+﻿namespace Drone_Fleet_Console;
+
+enum MainMenuOptionsEnum
 {
-    ListDrones = 1,
+    ListDrone = 1,
     AddDrone,
     PreFlightCheck,
     TakeOff,
