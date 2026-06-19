@@ -1,8 +1,9 @@
 ﻿public class SurveyDrone : Drone, IPhotoCapture, INavigable
 {
+    public override DroneTypeEnum Type => DroneTypeEnum.Survey;
     private int PhotoCountMax { get; } = 2000;
     public int PhotoCount { get; private set; } = 0;
-    public (double lat, double lon)? CurrentWaypoint { get; } = (0, 0);
+    public (double lat, double lon)? CurrentWaypoint { get; private set; } = (0, 0);
     public override void TakeOff()
     {
         if ((!IsAirborne) && (BatteryPercent > BatteryTakeOffLimit))
@@ -56,5 +57,6 @@
     public void SetWaypoint(double lat, double lon)
     {
         Console.WriteLine($"[SurveyDrone]: The {Name} drone (ID {Id}) waypoint set: {lat}, {lon}.");
+        CurrentWaypoint = (lat, lon);
     }
 }

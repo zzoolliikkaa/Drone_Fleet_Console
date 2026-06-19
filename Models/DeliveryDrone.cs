@@ -1,8 +1,9 @@
 ﻿public class DeliveryDrone : Drone, INavigable, ICargoCarrier
 {
+    public override DroneTypeEnum Type => DroneTypeEnum.Delivery;
     public double CapacityKg { get; } = 12;
     public double CurrentLoadKg { get; private set; }
-    public (double lat, double lon)? CurrentWaypoint { get; } = (0, 0);
+    public (double lat, double lon)? CurrentWaypoint { get; private set; } = (0, 0);
     public override void TakeOff()
     {
         if ((!IsAirborne) && (BatteryPercent > BatteryTakeOffLimit))
@@ -41,17 +42,27 @@
     public void SetWaypoint(double lat, double lon)
     {
         Console.WriteLine($"[DeliveryDrone]: The {Name} drone (ID {Id}) waypoint set: {lat}, {lon}.");
+        CurrentWaypoint = (lat, lon);
     }
     public bool Load(double kg)
     {
-        if (CurrentLoadKg + kg < CapacityKg)
+        if (!IsAirborne)
         {
-            Console.WriteLine($"[DeliveryDrone]: The {Name} drone (ID {Id}) loaded with {kg} kg.");
-            return true;
+            if (CurrentLoadKg + kg < CapacityKg)
+            {
+                Console.WriteLine($"[DeliveryDrone]: The {Name} drone (ID {Id}) loaded with {kg} kg.");
+                CurrentLoadKg = CurrentLoadKg + kg;
+                return true;
+            }
+            else
+            {
+                Console.WriteLine($"[DeliveryDrone]: The {Name} drone (ID {Id}) cannot load {kg} kg — capacity reached. Load unsuccessful.");
+                return false;
+            }
         }
         else
         {
-            Console.WriteLine($"[DeliveryDrone]: The {Name} drone (ID {Id}) cannot load {kg} kg — capacity reached. Load unsuccessful.");
+            Console.WriteLine($"[DeliveryDrone]: The {Name} drone (ID {Id}) is airborne.");
             return false;
         }
     }

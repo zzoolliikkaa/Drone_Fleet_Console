@@ -1,5 +1,6 @@
 ﻿public class RacingDrone : Drone
 {
+    public override DroneTypeEnum Type => DroneTypeEnum.Racing;
     public override void TakeOff()
     {
         if ((!IsAirborne) && (BatteryPercent > BatteryTakeOffLimit))
