@@ -4,7 +4,7 @@ using Drone_Fleet_Console.Models.Interfaces;
 public class SurveyDrone : Drone, IPhotoCapture, INavigable
 {
     public override DroneTypeEnum Type => DroneTypeEnum.Survey;
-    private int PhotoCountMax { get; } = 2000;
+    private int _photoCountMax { get; } = 2000;
     public int PhotoCount { get; private set; } = 0;
     public (double lat, double lon)? CurrentWaypoint { get; private set; } = (0, 0);
     public override void TakeOff()
@@ -35,7 +35,7 @@ public class SurveyDrone : Drone, IPhotoCapture, INavigable
     {
         if (BatteryPercent >= BatteryTakeOffLimit)
         {
-            if (PhotoCount < PhotoCountMax)
+            if (PhotoCount < _photoCountMax)
             {
                 Console.WriteLine($"[SurveyDrone]: The {Name} drone (ID {Id}) self-test passed.");
                 return true;
@@ -48,7 +48,7 @@ public class SurveyDrone : Drone, IPhotoCapture, INavigable
     {
         if (IsAirborne)
         {
-            if (PhotoCount < PhotoCountMax)
+            if (PhotoCount < _photoCountMax)
             {
                 Console.WriteLine($"[SurveyDrone]: The {Name} drone (ID {Id}) is taking a photo...");
                 PhotoCount++;
