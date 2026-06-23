@@ -15,7 +15,6 @@ public class Menu
     }
     public void DisplayMenu()
     {
-        Console.WriteLine("Please select an option:"); // nu are sens
         if (_menuOptions.Count > 0)
         {
             Console.Clear();

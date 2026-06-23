@@ -7,7 +7,7 @@ public class DroneRegistry
     private List<Drone> _droneList = new List<Drone>();
     public void ListDrones()
     {
-        if (!EmptyList())
+        if (!IsListEmpty())
         {
             Console.WriteLine("Listing drones...");
             foreach (var drone in _droneList)
@@ -87,7 +87,7 @@ public class DroneRegistry
 
     internal void PreFlightCheck()
     {
-        if (!EmptyList())
+        if (!IsListEmpty())
         {
             foreach (var drone in _droneList)
             {
@@ -99,7 +99,7 @@ public class DroneRegistry
 
     internal void TakeOff()
     {
-        if (!EmptyList())
+        if (!IsListEmpty())
         {
             if (SelectDroneById(out Drone? drone))
             {
@@ -112,7 +112,7 @@ public class DroneRegistry
 
     internal void Land()
     {
-        if (!EmptyList())
+        if (!IsListEmpty())
         {
             if (SelectDroneById(out Drone? drone))
             {
@@ -125,7 +125,7 @@ public class DroneRegistry
 
     internal void SetWaypoint()
     {
-        if (!EmptyList())
+        if (!IsListEmpty())
         {
             if (SelectDroneById(out Drone? drone))
             {
@@ -165,7 +165,7 @@ public class DroneRegistry
 
     internal void CapabilityActions()
     {
-        if (!EmptyList())
+        if (!IsListEmpty())
         {
             if (SelectDroneById(out Drone? drone))
             {
@@ -197,7 +197,7 @@ public class DroneRegistry
 
     internal void ChargeBattery()
     {
-        if (!EmptyList())
+        if (!IsListEmpty())
         {
             if (SelectDroneById(out Drone? drone))
             {
@@ -217,7 +217,7 @@ public class DroneRegistry
         }
     }
 
-    private bool EmptyList()
+    private bool IsListEmpty()
     {
         if (_droneList.Count == 0)
         {
